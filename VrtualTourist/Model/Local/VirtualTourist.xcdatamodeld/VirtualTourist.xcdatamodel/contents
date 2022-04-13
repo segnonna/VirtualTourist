@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LocationImage" representedClassName="LocationImage" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="secret" optional="YES" attributeType="String"/>
+        <attribute name="server" optional="YES" attributeType="String"/>
+        <relationship name="pinlocation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PinLocation" inverseName="locationimage" inverseEntity="PinLocation"/>
+    </entity>
+    <entity name="PinLocation" representedClassName="PinLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="locationimage" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocationImage" inverseName="pinlocation" inverseEntity="LocationImage"/>
+    </entity>
+    <elements>
+        <element name="LocationImage" positionX="184.39453125" positionY="-12.78125" width="128" height="89"/>
+        <element name="PinLocation" positionX="-104.7265625" positionY="-39.6484375" width="128" height="88"/>
+    </elements>
+</model>
