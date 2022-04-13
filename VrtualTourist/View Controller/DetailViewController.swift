@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class DetailViewController: MapViewController, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
+class DetailViewController: MapViewController, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate {
     
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var collectionView: UICollectionView!
@@ -125,15 +125,26 @@ class DetailViewController: MapViewController, UICollectionViewDataSource, NSFet
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let aLocationImage = fetchedResultController.object(at: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        if aLocationImage.imageData == nil {
+        VirtualTouristClient.loadPhoto(aLocationImage) { data, error in
+            guard error == nil else {
+                return
+            }
+            aLocationImage.imageData = data
+            cell.imageView?.image = UIImage(data: data!)
+            try? self.dataController.backgroundContext.save()
+        }
+        }
+        else {
+            cell.imageView?.image = UIImage(data: aLocationImage.imageData!)
+        }
         
-        cell.imageView?.loadImageUsingCache(withUrl: VirtualTouristClient.Endpoints.urlImage(aLocationImage.server ?? "", aLocationImage.id ?? "", aLocationImage.secret ?? "").stringValue)
         
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("didSelectItemAt")
         let aLocationImage = fetchedResultController.object(at: indexPath)
         showAlertForImageDeletion(aLocationImage)
     }
@@ -155,7 +166,7 @@ class DetailViewController: MapViewController, UICollectionViewDataSource, NSFet
     }
     
     fileprivate func loadImagesFromRemote() {
-        print("loadImagesFromRemote")
+        debugPrint("loadImagesFromRemote")
         VirtualTouristClient.loadImagesByLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) { listPhotos, error in
             let bgContext:NSManagedObjectContext! = self.dataController?.backgroundContext
             self.setUpView(false)
@@ -170,7 +181,7 @@ class DetailViewController: MapViewController, UICollectionViewDataSource, NSFet
     }
     
     fileprivate func removeAllPhotos(completion: @escaping () -> Void) {
-        print("removeAllPhotos")
+        debugPrint("removeAllPhotos")
         for photo in fetchedResultController.fetchedObjects! {
             dataController.viewContex.delete(photo)
             do {
@@ -221,7 +232,7 @@ extension DetailViewController {
     }
     
     fileprivate func fetchPinLocationByCoordinates() {
-        print("fetchPinLocationByCoordinates")
+        debugPrint("fetchPinLocationByCoordinates")
         let fetchPinLocationRequest: NSFetchRequest<PinLocation> = PinLocation.fetchRequest()
         let predicate = NSPredicate(format: "latitude == %@ AND longitude == %@", String(coordinate.latitude), String(coordinate.longitude))
         fetchPinLocationRequest.predicate = predicate
@@ -240,7 +251,7 @@ extension DetailViewController {
     }
     
     fileprivate func fetchImageFromLocal() {
-        print("fetchImageFromLocal:\(pinLocation.longitude) \(pinLocation.latitude)")
+        debugPrint("fetchImageFromLocal:\(pinLocation.longitude) \(pinLocation.latitude)")
         do {
             setupFetchedResultsController()
             let locationImages = try dataController.backgroundContext.fetch(requestImageFromLocal())

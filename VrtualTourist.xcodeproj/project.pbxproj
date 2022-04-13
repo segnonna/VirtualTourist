@@ -13,7 +13,6 @@
 		B5097EED2805D69F009F80EB /* PhotoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5097EEC2805D69F009F80EB /* PhotoResponse.swift */; };
 		B5097EF02805E7E4009F80EB /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5097EEF2805E7E4009F80EB /* CollectionViewCell.swift */; };
 		B5097EF22806B396009F80EB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5097EF12806B396009F80EB /* Constants.swift */; };
-		B5097EF42806C85F009F80EB /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5097EF32806C85F009F80EB /* UIImageView+Extensions.swift */; };
 		B5C10EB82805904F0098F98A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C10EB72805904F0098F98A /* AppDelegate.swift */; };
 		B5C10EBC2805904F0098F98A /* TravelLocationsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C10EBB2805904F0098F98A /* TravelLocationsMapViewController.swift */; };
 		B5C10EBF2805904F0098F98A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C10EBD2805904F0098F98A /* Main.storyboard */; };
@@ -30,7 +29,6 @@
 		B5097EEC2805D69F009F80EB /* PhotoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResponse.swift; sourceTree = "<group>"; };
 		B5097EEF2805E7E4009F80EB /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		B5097EF12806B396009F80EB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		B5097EF32806C85F009F80EB /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		B5C10EB42805904F0098F98A /* VrtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VrtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C10EB72805904F0098F98A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5C10EBB2805904F0098F98A /* TravelLocationsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelLocationsMapViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				B5097EE72805D179009F80EB /* Local */,
 				B5097EE62805D170009F80EB /* Remote */,
 				B5097EF12806B396009F80EB /* Constants.swift */,
-				B5097EF32806C85F009F80EB /* UIImageView+Extensions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,7 +201,6 @@
 			files = (
 				B5097EED2805D69F009F80EB /* PhotoResponse.swift in Sources */,
 				B5C10ED12805969B0098F98A /* DataController.swift in Sources */,
-				B5097EF42806C85F009F80EB /* UIImageView+Extensions.swift in Sources */,
 				B5097EF02805E7E4009F80EB /* CollectionViewCell.swift in Sources */,
 				B5097EE52805CEDB009F80EB /* MapViewController.swift in Sources */,
 				B5097EE92805D197009F80EB /* VirtualTouristClient.swift in Sources */,

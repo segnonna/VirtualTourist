@@ -89,6 +89,7 @@
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cM3-Qf-VVt">
                                                             <rect key="frame" x="0.0" y="0.0" width="93" height="122"/>
+                                                            <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                         </imageView>
                                                     </subviews>
                                                     <constraints>
@@ -111,7 +112,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9vl-vg-myg">
                                         <rect key="frame" x="0.0" y="743" width="414" height="31"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="gray" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="gray" title="New Collection"/>
                                         <connections>
                                             <action selector="fetchImage:" destination="ZEw-g0-8fi" eventType="touchUpInside" id="T3z-gF-jbE"/>
                                         </connections>
@@ -170,6 +171,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

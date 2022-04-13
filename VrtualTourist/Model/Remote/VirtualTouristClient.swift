@@ -16,9 +16,9 @@ class VirtualTouristClient {
     ///https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95e591f77ecc3dda1923f7c249c79356&lat=37.7994&lon=122.3950
     
     enum Endpoints {
-        static let base = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95e591f77ecc3dda1923f7c249c79356"
+        static let base = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95e591f77ecc3dda1923f7c249c79356&per_page=30"
         
-        case searchImage(String, String)
+        case searchImage(String, String,Int)
         
         case urlImage(String, String, String)
         
@@ -26,7 +26,7 @@ class VirtualTouristClient {
         
         var stringValue: String {
             switch self {
-            case .searchImage(let latitude, let longitude): return "\(Endpoints.base)&lat=\(latitude)&lon=\(longitude)&format=json&nojsoncallback=1"
+            case .searchImage(let latitude, let longitude, let page): return "\(Endpoints.base)&lat=\(latitude)&lon=\(longitude)&page=\(page)&format=json&nojsoncallback=1"
             case .urlImage(let server, let id, let secret): return  "https://live.staticflickr.com/\(server)/\(id)_\(secret).jpg"
             }
             
@@ -39,7 +39,7 @@ class VirtualTouristClient {
     
     class func loadImagesByLocation (latitude:Double, longitude:Double, completion: @escaping ([Photo]?, Error?) -> Void){
         
-        let task = URLSession.shared.dataTask(with: Endpoints.searchImage(String(format: "%.1f", latitude), String(format: "%.1f", longitude)).url) { data, response, error in
+        let task = URLSession.shared.dataTask(with: Endpoints.searchImage(String(format: "%.1f", latitude), String(format: "%.1f", longitude), Int.random(in: 0...10)).url) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
@@ -55,6 +55,24 @@ class VirtualTouristClient {
             } catch {
                 print(error)
                 completion(nil, error)
+            }
+        }
+        task.resume()
+    }
+    
+    class func loadPhoto(_ locationImage: LocationImage, completion: @escaping (Data?, Error?) -> Void) {
+        let task = URLSession.shared.downloadTask(with: VirtualTouristClient.Endpoints.urlImage(locationImage.server ?? "", locationImage.id ?? "", locationImage.secret ?? "").url) { tempURL, response, error in
+            guard error == nil, tempURL != nil else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            
+            if let data = try? Data(contentsOf: tempURL!) {
+                DispatchQueue.main.async {
+                    completion(data, nil)
+                }
             }
         }
         task.resume()

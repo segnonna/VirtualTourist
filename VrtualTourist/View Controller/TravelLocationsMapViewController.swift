@@ -55,7 +55,7 @@ class TravelLocationsMapViewController: MapViewController, NSFetchedResultsContr
     }
     
     @objc private func addPoint(longGesture: UIGestureRecognizer) {
-        if longGesture.state == .ended {
+        if longGesture.state == .began {
             let touchPoint = longGesture.location(in: mapView)
             let wayCoords = mapView.convert(touchPoint, toCoordinateFrom: mapView)
             
