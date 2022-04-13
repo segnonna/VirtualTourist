@@ -10,7 +10,7 @@ import Foundation
 class VirtualTouristClient {
     let API_KEY = "95e591f77ecc3dda1923f7c249c79356"
     let SECRET_KEY = "3cafb5025ae20835"
-   
+    
     
     let BASE_URL = "https://api.flickr.com/services/rest/?method=flickr.photos.search&"
     ///https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95e591f77ecc3dda1923f7c249c79356&lat=37.7994&lon=122.3950
