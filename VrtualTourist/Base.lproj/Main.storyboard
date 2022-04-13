@@ -61,12 +61,18 @@
                                         </constraints>
                                     </mapView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="medium" id="27A-Kt-pYN">
-                                        <rect key="frame" x="0.0" y="241" width="414" height="20"/>
+                                        <rect key="frame" x="0.0" y="175.5" width="414" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="No image found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXX-av-NOc">
+                                        <rect key="frame" x="0.0" y="200" width="414" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="x4A-wq-H61">
                                         <rect key="frame" x="0.0" y="200" width="414" height="543"/>
-                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5cq-mC-dNM">
                                             <size key="itemSize" width="93" height="122"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -135,6 +141,7 @@
                     <connections>
                         <outlet property="button" destination="9vl-vg-myg" id="PHH-Jq-tav"/>
                         <outlet property="collectionView" destination="x4A-wq-H61" id="eQt-zG-OTG"/>
+                        <outlet property="labelEmptyList" destination="cXX-av-NOc" id="4Vq-Oc-U72"/>
                         <outlet property="loader" destination="27A-Kt-pYN" id="LIG-i5-Ipg"/>
                         <outlet property="mapView" destination="t9k-Uz-1Bh" id="mQy-wl-gDj"/>
                     </connections>
@@ -165,9 +172,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

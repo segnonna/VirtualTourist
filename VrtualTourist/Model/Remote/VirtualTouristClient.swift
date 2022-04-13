@@ -26,7 +26,7 @@ class VirtualTouristClient {
         
         var stringValue: String {
             switch self {
-            case .searchImage(let latitude, let longitude): return "\(Endpoints.base)&lat=\(latitude)&lon=\(longitude)&format=json"
+            case .searchImage(let latitude, let longitude): return "\(Endpoints.base)&lat=\(latitude)&lon=\(longitude)&format=json&nojsoncallback=1"
             case .urlImage(let server, let id, let secret): return  "https://live.staticflickr.com/\(server)/\(id)_\(secret).jpg"
             }
             
@@ -46,10 +46,9 @@ class VirtualTouristClient {
                 }
                 return
             }
-            let newData = data.subdata(in: 14..<data.count).dropLast()
             let decoder = JSONDecoder()
             do {
-                let responseObject = try decoder.decode(Photoos.self, from: newData)
+                let responseObject = try decoder.decode(PhotoResponse.self, from: data)
                 DispatchQueue.main.async {
                     completion(responseObject.photos.photo, nil)
                 }

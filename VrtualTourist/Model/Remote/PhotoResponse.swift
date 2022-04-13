@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Photoos:Codable{
+struct PhotoResponse:Codable{
     let photos: Photos
 }
 

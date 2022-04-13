@@ -14,6 +14,11 @@ class TravelLocationsMapViewController: MapViewController, NSFetchedResultsContr
     @IBOutlet var mapView: MKMapView!
     var dataController: DataController!
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(addPoint(longGesture:)))
