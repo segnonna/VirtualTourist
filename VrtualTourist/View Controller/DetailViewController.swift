@@ -61,7 +61,6 @@ class DetailViewController: MapViewController, UICollectionViewDataSource, UICol
     }
     
     
-    
     private func requestImageFromLocal() -> NSFetchRequest<LocationImage>{
         let fetchRequest: NSFetchRequest<LocationImage> = LocationImage.fetchRequest()
         let predicate = NSPredicate(format: "pinlocation == %@", pinLocation)
@@ -86,15 +85,17 @@ class DetailViewController: MapViewController, UICollectionViewDataSource, UICol
         }
     }
     
-    fileprivate func addPhotoToLocal(_ listPhotos: [Photo]?, _ bgContext: NSManagedObjectContext?) {
-        listPhotos?.forEach({ photo_ in
+    fileprivate func addPhotoToLocal(_ listPhotos: Photos?, _ bgContext: NSManagedObjectContext?) {
+        listPhotos?.photo.forEach({ photo_ in
             
             bgContext?.perform {
+                
                 let image = LocationImage(context: bgContext!)
                 image.id = photo_.id
                 image.secret = photo_.secret
                 image.server = photo_.server
                 image.pinlocation = self.pinLocation
+                self.pinLocation.totalPage = Int16(listPhotos?.pages ?? 1)
                 try? bgContext!.save()
             }
             
@@ -166,15 +167,15 @@ class DetailViewController: MapViewController, UICollectionViewDataSource, UICol
     }
     
     fileprivate func loadImagesFromRemote() {
-        debugPrint("loadImagesFromRemote")
-        VirtualTouristClient.loadImagesByLocation(latitude: coordinate.latitude, longitude: coordinate.longitude) { listPhotos, error in
+        debugPrint("loadImagesFromRemote: \(pinLocation.totalPage)")
+        VirtualTouristClient.loadImagesByLocation(latitude: coordinate.latitude, longitude: coordinate.longitude, totalPage: Int(pinLocation.totalPage)) { listPhotos, error in
             let bgContext:NSManagedObjectContext! = self.dataController?.backgroundContext
             self.setUpView(false)
-            if listPhotos?.isEmpty ?? false {
+            if listPhotos?.photo.isEmpty ?? false {
                 self.showEmptyListLabel(true)
             } else {
                 self.showEmptyListLabel(false)
-                self.list = listPhotos
+                self.list = listPhotos?.photo
                 self.addPhotoToLocal(listPhotos, bgContext)
             }
         }

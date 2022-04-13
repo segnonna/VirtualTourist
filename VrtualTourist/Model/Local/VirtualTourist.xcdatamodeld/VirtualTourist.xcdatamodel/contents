@@ -10,10 +10,11 @@
     <entity name="PinLocation" representedClassName="PinLocation" syncable="YES" codeGenerationType="class">
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalPage" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="locationimage" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocationImage" inverseName="pinlocation" inverseEntity="LocationImage"/>
     </entity>
     <elements>
         <element name="LocationImage" positionX="184.39453125" positionY="-12.78125" width="128" height="104"/>
-        <element name="PinLocation" positionX="-104.7265625" positionY="-39.6484375" width="128" height="88"/>
+        <element name="PinLocation" positionX="-104.7265625" positionY="-39.6484375" width="128" height="89"/>
     </elements>
 </model>

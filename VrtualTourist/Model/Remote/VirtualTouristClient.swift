@@ -16,7 +16,8 @@ class VirtualTouristClient {
     ///https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95e591f77ecc3dda1923f7c249c79356&lat=37.7994&lon=122.3950
     
     enum Endpoints {
-        static let base = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95e591f77ecc3dda1923f7c249c79356&per_page=30"
+        static let perPage = 30
+        static let base = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95e591f77ecc3dda1923f7c249c79356&per_page=\(perPage)"
         
         case searchImage(String, String,Int)
         
@@ -37,9 +38,10 @@ class VirtualTouristClient {
         }
     }
     
-    class func loadImagesByLocation (latitude:Double, longitude:Double, completion: @escaping ([Photo]?, Error?) -> Void){
+    class func loadImagesByLocation (latitude:Double, longitude:Double, totalPage: Int, completion: @escaping (Photos?, Error?) -> Void){
         
-        let task = URLSession.shared.dataTask(with: Endpoints.searchImage(String(format: "%.1f", latitude), String(format: "%.1f", longitude), Int.random(in: 0...10)).url) { data, response, error in
+        
+        let task = URLSession.shared.dataTask(with: Endpoints.searchImage(String(format: "%.1f", latitude), String(format: "%.1f", longitude), Int.random(in: 1...totalPage)).url) { data, response, error in
             guard let data = data else {
                 DispatchQueue.main.async {
                     completion(nil, error)
@@ -50,7 +52,7 @@ class VirtualTouristClient {
             do {
                 let responseObject = try decoder.decode(PhotoResponse.self, from: data)
                 DispatchQueue.main.async {
-                    completion(responseObject.photos.photo, nil)
+                    completion(responseObject.photos, nil)
                 }
             } catch {
                 print(error)

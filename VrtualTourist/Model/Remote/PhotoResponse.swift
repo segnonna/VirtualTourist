@@ -12,6 +12,7 @@ struct PhotoResponse:Codable{
 }
 
 struct Photos: Codable{
+    let pages: Int
     let photo:[Photo]
 }
 struct Photo: Codable{
